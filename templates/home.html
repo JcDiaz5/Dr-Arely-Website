@@ -4,36 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-    <title>Home | Endodoncias</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Barlow+Condensed&family=Barlow:wght@200;400&family=Dancing+Script&family=Fira+Sans&family=Handjet&family=Inter:wght@200&family=Roboto:wght@100&family=Varela+Round&display=swap" rel="stylesheet">
+    <title>Dra. Arely Uribe | Endodoncias</title>
 </head>
 <body>
     <div class="main-bg">
-        <div class="nav-links">
-            <a href="###">Educación</a>
-            <a href="###">Preguntas Frecuentes</a>
-        </div>
-        <div class="content">
-            <div class="text-container">
-                <div class="title">
-                    <h1>Dra. Arely Uribe</h1>
-                    <h2>Cirujano Dental | Especialista en Endodoncia</h2>
+        <div class="navbar-background">
+            <div class="nav-bar">
+                <div class="logo">
+                    <img src="/../static/img/Arely's_Logo.png" class="navbar-logo" alt="Logo_img">
                 </div>
-                <div class="introduction-container">
-                    <p>
-                        Cirujano Dentista con formación en Odontología y
-                        especialización en Endodoncia. Con una sólida
-                        trayectoria en carrera profesional como Endodoncista, y
-                        con experiencia en multiples consultorios dentales, he
-                        demostrado habilidades eficaces en procedimientos dentales,
-                        siempre brindando la mejor atención al paciente.
-                    </p>
-                </div>
-                <div class="main-btn-container">
-                    <a href="###" class="main-btn">Agendar Cita</a>
+                <div class="nav-links">
+                    <a href="###" class="scroll-link">Educación</a>
+                    <a href="#faq-block" class="scroll-link">Preguntas Frecuentes</a>
+                    <a href="#resume-block" class="scroll-link">CV</a>
                 </div>
             </div>
-            <img src="/../static/img/arely_pic.jpeg" class="main-img" alt="img">
+        </div>
+        <div class="content-background">
+            <div class="content">
+                <div class="text-container">
+                    <div class="title">
+                        <h1>Dra. <span class="title-color2">Arely Uribe</span></h1>
+                        <h2>Cirujano Dental | Especialista en Endodoncia</h2>
+                    </div>
+                    <div class="introduction-container">
+                        <p>
+                            Cirujano Dentista con formación en Odontología y
+                            especialización en Endodoncia. Con una sólida
+                            trayectoria en carrera profesional como Endodoncista, y
+                            con experiencia en multiples consultorios dentales, he
+                            demostrado habilidades eficaces en procedimientos dentales,
+                            siempre brindando la mejor atención al paciente.
+                        </p>
+                    </div>
+                    <div class="main-btn-container">
+                        <a href="###" class="main-btn" onclick="redirect()">Agendar Cita</a>
+                    </div>
+                </div>
+                <img src="/../static/img/arely_pic.jpeg" class="main-img" alt="img">
+            </div>
+        </div>
+        <div class="faq-block" id="faq-block">
+            <h1>Preguntas Frecuentes</h1>
+            <div class="faq-container">
+                <h2>¿Que es y para que sirve una Endodoncia?</h2>
+                <p>
+                    La endodoncia es un procedimiento que tiene como finalidad preservar 
+                    las piezas dentales dañadas, evitando así su pérdida. Para ello, se 
+                    extrae la pulpa dental y la cavidad resultante, se rellena y sella 
+                    con material inerte y biocompatible.
+                </p>
+                <h2></h2>
+            </div>
+        </div>
+        <div class="resume-block" id="resume-block">
+            <h1>Mi Currículum</h1>
+            <a href="/../static" class="cv-link" onclick="openPdf()">Abrir en PDF</a>
+            <img src="/../static/img/arely_cv.png" alt="CV">
         </div>
     </div>
+
+    <script>
+        function openPdf() {
+            var pdfUrl = '/../static/documents/arely_cv.pdf';
+            window.open(pdfUrl, '_blank');
+            event.preventDefault();
+        }
+        //...............Smooth scrolling effect..................
+        document.addEventListener('DOMContentLoaded', function() {
+            var scrollLinks = document.querySelectorAll('.scroll-link');
+
+            scrollLinks.forEach(function(link) {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    var targetID = this.getAttribute('href').substring(1);
+                    document.getElementById(targetID).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+        });
+    </script>
+
 </body>
 </html>
