@@ -6,5 +6,9 @@ app.secret_key = "My secret"
 def home():
     return render_template('home.html')
 
+@app.route('/citas')
+def booking():
+    return render_template('booking.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
