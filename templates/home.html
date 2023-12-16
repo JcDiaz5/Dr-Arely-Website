@@ -17,7 +17,7 @@
                     <img src="/../static/img/Arely's_Logo.png" class="navbar-logo" alt="Logo_img">
                 </div>
                 <div class="nav-links">
-                    <a href="###" class="scroll-link">Educación</a>
+                    <a href="#location-block" class="scroll-link">Ubicación</a>
                     <a href="#faq-block" class="scroll-link">Preguntas Frecuentes</a>
                     <a href="#resume-block" class="scroll-link">CV</a>
                 </div>
@@ -47,27 +47,78 @@
                 <img src="/../static/img/arely_pic.jpeg" class="main-img" alt="img">
             </div>
         </div>
-        <div class="faq-block" id="faq-block">
-            <h1>Preguntas Frecuentes</h1>
-            <div class="faq-container">
-                <h2>¿Que es y para que sirve una Endodoncia?</h2>
-                <p>
-                    La endodoncia es un procedimiento que tiene como finalidad preservar 
-                    las piezas dentales dañadas, evitando así su pérdida. Para ello, se 
-                    extrae la pulpa dental y la cavidad resultante, se rellena y sella 
-                    con material inerte y biocompatible.
-                </p>
-                <h2></h2>
+        <div class="location-block-background">
+            <div class="location-block" id="location-block">
+                <h1>Ubicación</h1>
+                <h3>Dental Spa</h3>
+                <p>Av. Francisco I. Madero 1500-3, Zona Centro, 22000 Tijuana, B.C.</p>
+                <a href="https://maps.app.goo.gl/r7vp8ngtC2za1eUq5" target="_blank">Ver en Google Maps</a>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d9761.769295202335!2d-117.03916462483072!3d32.52963982831688!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d949ac8fe737d5%3A0xb7091e6ad65ed707!2sDental%20Spa%20By%20K%26F!5e0!3m2!1sen!2smx!4v1702682487881!5m2!1sen!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
-        <div class="resume-block" id="resume-block">
-            <h1>Mi Currículum</h1>
-            <a href="/../static" class="cv-link" onclick="openPdf()">Abrir en PDF</a>
-            <img src="/../static/img/arely_cv.png" alt="CV">
+        <div class="faq-block-backgound">
+            <div class="faq-block" id="faq-block">
+                <h1>Preguntas Frecuentes</h1>
+                <div class="faq-container">
+                    <h2>¿Qué es y para qué sirve una Endodoncia?</h2>
+                    <p>
+                        La endodoncia es un procedimiento que tiene como finalidad preservar 
+                        las piezas dentales dañadas, evitando así su pérdida. Para ello, se 
+                        extrae la pulpa dental y la cavidad resultante, se rellena y sella 
+                        con material inerte y biocompatible.
+                    </p>
+                    <h2>¿Cuándo es necesario realizar una endodoncia?</h2>
+                    <p>
+                        Esencialmente cuando la infección que afecta al diente a provocado una 
+                        caries que perfora el esmalte y la dentina, dejando al descubierto el 
+                        tejido pulpar, que también resulta infectado. También se puede realizar 
+                        en caso de rotura por traumatismo o ante la existencia de una enfermedad 
+                        periodontal.
+                    </p>
+                    <h2>¿Qué sintomas puede indicar la necesidad de una endodoncia?</h2>
+                    <p>
+                        Cada caso es diferente, pero los síntomas pueden más frecuentes son un 
+                        dolor intenso o hipersensibilidad al frío o al calor. A veces no se producen 
+                        síntomas y el problema se detecta en la consulta del odontólogo cuando se 
+                        realiza una revisión del estado general de la dentadura.
+                    </p>
+                    <h2>¿Es dolorosa la endodoncia?</h2>
+                    <p>
+                        No, ya que se realiza bajo anestesia local, aunque en ocasionas puede sentirse 
+                        algo de dolor durante unos días después de realizarla. 
+                    </p>
+                    <h2>¿Qué cuidados hay que seguir tras un tratamiento de endodoncia?</h2>
+                    <p>
+                        Tras la operación se recomendará el uso de medicamentos antiinflamatorios. 
+                        A la hora de comer lo ideal es no usar la zona afectada durante los primeros 
+                        días. En cuanto al lavado de los dientes, la práctica de una endodoncia no altera 
+                        drásticamente su cuidado habitual, aunque es aconsejable familiarizarse con el uso 
+                        de la seda dental.
+                    </p>
+                    <h2>¿Existe alguna alternativa a una endodoncia?</h2>
+                    <p>
+                        Partiendo de la base de que la endodoncia permite mantener la forma natural del 
+                        diente, en caso de que se prefiera recibir otro tratamiento, la alternativa  al 
+                        tratamiento de conductos es la extracción. No obstante, los profesionales por lo 
+                        general suelen preferir mantener el diente original.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="resume-block-background">
+            <div class="resume-block" id="resume-block">
+                <h1>Mi Currículum</h1>
+                <a href="/../static" class="cv-link" onclick="openPdf()">Abrir en PDF</a>
+                <img src="/../static/img/arely_cv.png" alt="CV">
+            </div>
+        </div>
+        <div class="endbar-background">
+
         </div>
     </div>
 
     <script>
+        // .................Open PDF in new tab.............................
         function openPdf() {
             var pdfUrl = '/../static/documents/arely_cv.pdf';
             window.open(pdfUrl, '_blank');

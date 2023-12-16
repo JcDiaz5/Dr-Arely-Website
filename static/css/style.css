@@ -53,6 +53,8 @@
 .content-background {
     width: 100%;
     background: linear-gradient(to right, rgb(210, 236, 255), rgb(247, 232, 233));
+    border-bottom: .5px solid silver;
+
 }
 
 .content {
@@ -118,12 +120,51 @@
     background-color: rgb(56, 119, 173);
 }
 
+/* ______________________LOCATION BLOCK_________________________ */
+.location-block-background {
+    background-color: rgb(245, 250, 253);
+    border-bottom: .5px solid silver;
+}
+
+.location-block {
+    width: 1000px;
+    margin: 0px auto;
+    padding: 30px 0px;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+}
+
+.location-block h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.location-block a {
+    color: rgb(18, 71, 109);
+    transition: transform 0.3s ease-in-out;
+}
+
+.location-block a:hover {
+    transform: scale(1.1);
+}
+
 /* _______________________RESUME BLOCK__________________________ */
+.resume-block-background {
+    background-color: white;
+    border-bottom: .5px solid silver;
+}
+
 .resume-block {
     display:flex;
     flex-direction: column;
     align-items: center;
+    width: 1000px;
+    margin: 0px auto;
     padding: 30px 0px;
+    gap: 20px;
 }
 
 .cv-link {
@@ -135,6 +176,11 @@
 }
 
 /* _________________________FAQ BLOCK___________________________ */
+.faq-block-backgound {
+    background: rgb(253, 250, 253);
+    border-bottom: .5px solid silver;
+}
+
 .faq-block {
     display: flex;
     flex-direction: column;
@@ -148,6 +194,10 @@
     text-align: center;
 }
 
+.faq-container p {
+    margin-bottom: 20px;
+}
+
 /* ______________IMAGES_________________________________________ */
 
 .main-img {
@@ -158,11 +208,13 @@ border: 10px solid whitesmoke;
 }
 
 .navbar-logo {
-    width: 40px;
+    width: 45px;
     padding-top: 10px;
-    transition: transform 0.3s ease-in-out;
 }
 
-.navbar-logo:hover {
-    transform: scale(1.1);
+/* ___________________________END BAR_______________________________ */
+.endbar-background {
+    width: 100%;
+    height: 50px;
+    background-color: rgb(230, 230, 230);
 }
