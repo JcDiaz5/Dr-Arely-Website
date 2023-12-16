@@ -53,8 +53,6 @@
 .content-background {
     width: 100%;
     background: linear-gradient(to right, rgb(210, 236, 255), rgb(247, 232, 233));
-    border-bottom: .5px solid silver;
-
 }
 
 .content {
@@ -122,8 +120,7 @@
 
 /* ______________________LOCATION BLOCK_________________________ */
 .location-block-background {
-    background-color: rgb(245, 250, 253);
-    border-bottom: .5px solid silver;
+    background: linear-gradient(to right, rgb(210, 236, 255), rgb(247, 232, 233));
 }
 
 .location-block {
@@ -139,6 +136,7 @@
 }
 
 .location-block h1 {
+    color: rgb(18, 71, 109);
     text-align: center;
     margin-bottom: 20px;
 }
@@ -153,8 +151,7 @@
 
 /* _______________________RESUME BLOCK__________________________ */
 .resume-block-background {
-    background-color: white;
-    border-bottom: .5px solid silver;
+    background: linear-gradient(to right, rgb(210, 236, 255), rgb(247, 232, 233));
 }
 
 .resume-block {
@@ -177,8 +174,7 @@
 
 /* _________________________FAQ BLOCK___________________________ */
 .faq-block-backgound {
-    background: rgb(253, 250, 253);
-    border-bottom: .5px solid silver;
+    background: linear-gradient(to right, rgb(210, 236, 255), rgb(247, 232, 233));
 }
 
 .faq-block {
@@ -191,7 +187,12 @@
 }
 
 .faq-block h1 {
+    color: rgb(110, 44, 112);
     text-align: center;
+}
+
+.faq-container h2 {
+    color: rgb(18, 71, 109);
 }
 
 .faq-container p {
