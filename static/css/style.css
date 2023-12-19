@@ -271,3 +271,12 @@ button:hover {
     text-align: center;
     padding: 20px;
 }
+
+.date-time {
+    display: flex;
+    gap: 50px;
+}
+
+.date-field {
+    flex: 60%;
+}

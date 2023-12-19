@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Barlow+Condensed&family=Barlow:wght@200;400&family=Dancing+Script&family=Fira+Sans&family=Handjet&family=Inter:wght@200&family=Roboto:wght@100&family=Varela+Round&display=swap" rel="stylesheet">
+    <title>Dra. Arely | Confirmación</title>
+</head>
+<body>
+    <h1>Booking Confirmation</h1>
+    <p>Thank you for booking an appointment with us. Your details are as follows:</p>
+    <ul>
+        <li><strong>Name:</strong> {{ details.name }}</li>
+        <li><strong>Email:</strong> {{ details.email }}</li>
+        <li><strong>Appointment Datetime:</strong> {{ details.datetime }}</li>
+        <li><strong>Guest ID:</strong> {{ details.guest_id }}</li>
+    </ul>
+</body>
+</html>

@@ -1,69 +1,82 @@
-from flask import Flask, render_template, redirect, request, url_for, session
-from google.oauth2 import id_token
-from google.auth.transport import requests
-from google_auth_oauthlib.flow import Flow
+from flask import Flask, render_template, request
+from flask_wtf import FlaskForm
+from wtforms import StringField, DateField, TimeField
+from wtforms.validators import DataRequired
+from googleapiclient.discovery import build
+from google.auth.transport.requests import Request
+from google.oauth2.service_account import Credentials
+
+import os
+import uuid
+import datetime
 
 app = Flask(__name__)
-app.secret_key = "Arely's secret"
+app.secret_key = "Balu's secret"  # Change this to a secure secret key.
 
-from datetime import timedelta
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=60)  # Adjust as needed
+DENTIST_CALENDAR_ID = 'dra-arely-s-website@dental-website-1116.iam.gserviceaccount.com'
 
-CLIENT_ID = '265023238074-14b0gggj86ft651p6ec521nkubt5srlc.apps.googleusercontent.com'
-CLIENT_SECRET = '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'
-REDIRECT_URI = 'http://localhost:5000/oauth2callback'
-
+class BookingForm(FlaskForm):
+    name = StringField('Name', validators=[DataRequired()])
+    email = StringField('Email', validators=[DataRequired()])
+    date = DateField('Date', validators=[DataRequired()])
+    time = TimeField('Time', validators=[DataRequired()])
 
 @app.route('/')
 def home():
     return render_template('home.html')
 
-@app.route('/citas')
-def booking():
-    return render_template('booking.html')
+appointments = []
 
-@app.route('/login')
-def login():
-    # Set up the OAuth flow
-    flow = Flow.from_client_secrets_file(
-        'credentials.json',
-        scopes=['openid', 'email'],
-        redirect_uri=REDIRECT_URI
-    )
+@app.route('/book', methods=['GET', 'POST'])
+def book():
+    form = BookingForm()
 
-    authorization_url, state = flow.authorization_url(prompt='consent')
+    if request.method == 'POST':
+        guest_id = str(uuid.uuid4())
+        appointment_details = {
+            'name': request.form['name'],
+            'email': request.form['email'],
+            'date': request.form['date'],
+            'time': request.form['time'],
+            'guest_id': guest_id
+        }
 
-    # Store the state so the callback can verify the auth response.
-    session['oauth_state'] = state
+        # Store appointment details.
+        appointments.append(appointment_details)
 
-    print("****** Redirecting to Google for login")
-    return redirect(authorization_url)
+        # Call a function to send the details to the Google Calendar.
+        send_to_google_calendar(appointment_details)
 
-@app.route('/oauth2callback')
-def oauth2callback():
-    # Validate the OAuth response
-    state = session.get('oauth_state')
-    print("***** oauth_state from session:", state)
+        return render_template('booking_confirmation.html', details=appointment_details)
 
-    flow = Flow.from_client_secrets_file(
-        'credentials.json',
-        scopes=['openid', 'email'],
-        state=state,
-        redirect_uri=REDIRECT_URI
-    )
+    return render_template('booking_form.html', form=form)
 
-    authorization_response = request.url
-    flow.fetch_token(authorization_response=authorization_response)
+# Function to send appointment details to Google Calendar
+def send_to_google_calendar(details):
+    # Combine date and time strings into a single datetime object
+    datetime_str = f"{details['date']} {details['time']}"
+    details['appointment_datetime'] = datetime.datetime.strptime(datetime_str, '%Y-%m-%d %H:%M')
 
-    # Get user information
-    id_info = id_token.verify_oauth2_token(flow.credentials.id_token, requests.Request(), CLIENT_ID)
 
-    # Store user information in the session
-    session['google_id'] = id_info['sub']
-    session['email'] = id_info['email']
+    # Adjust the start and end times accordingly
+    event = {
+        'summary': 'Appointment',
+        'description': f"Name: {details['name']}\nEmail: {details['email']}\nDate: {details['date']}\nTime: {details['time']}\nGuest ID: {details['guest_id']}",
+    }
 
-    # Redirect to the booking form or homepage.
-    return redirect(url_for('citas'))
+    service = get_google_calendar_service()
+    service.events().insert(calendarId=DENTIST_CALENDAR_ID, body=event).execute()
+    print('############## Send to calendar is working #############', event)
 
-if __name__ == "__main__":
-    app.run(debug=True, ssl_context=('cert.pem', 'key.pem'))
+def get_google_calendar_service():
+    # Use a service account for server-to-server authentication
+    credentials = Credentials.from_service_account_file('credentials.json', scopes=['https://www.googleapis.com/auth/calendar'])
+
+    # Create the Google Calendar service
+    service = build('calendar', 'v3', credentials=credentials)
+
+    print('*********** Get Calendar is working ***********')
+    return service
+
+if __name__ == '__main__':
+    app.run(debug=True)

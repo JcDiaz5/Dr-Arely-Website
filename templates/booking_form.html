@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC&family=Barlow+Condensed&family=Barlow:wght@200;400&family=Dancing+Script&family=Fira+Sans&family=Handjet&family=Inter:wght@200&family=Roboto:wght@100&family=Varela+Round&display=swap" rel="stylesheet">
+    <title>Dra. Arely Uribe | Agendar Cita</title>
+</head>
+<body>
+    <div class="booking-bg">
+        <div class="navbar-background">
+            <div class="nav-bar">
+                <div class="logo">
+                    <img src="/../static/img/Arely's_Logo.png" class="navbar-logo" alt="Logo_img">
+                </div>
+                <div class="nav-links">
+                    <a href="/" class="btn-return">Regresar</a>
+                </div>
+            </div>
+        </div>
+        <h1>Book an Appointment</h1>
+        <form method="post" action="/book">
+            {{ form.csrf_token }}
+            <div>
+                
+                <label for="name">Nombre Completo:</label>
+                <input type="text" class="name-field" name="name">
+            </div>
+            <div>
+                <label for="email">Correo Electronico:</label>
+                <input type="email" class="email-field" name="email">
+            </div>
+            <div class="date-time">
+                <div class="date-field">
+                    <label for="date">Fecha:</label>
+                    <input type="date" class="date-field" name="date">
+                </div>
+                <div class="time-field">
+                    <label for="time">Hora:</label>
+                    <input type="time" class="time-field" name="time">
+                </div>
+            </div>
+            <div>
+                <button type="submit">Book Appointment</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
