@@ -265,3 +265,9 @@ button:hover {
     height: 100vh;
     background: linear-gradient(to right, rgb(210, 236, 255), rgb(247, 232, 233));
 }
+
+#confirmationMessage {
+    color:rgb(114, 81, 125);
+    text-align: center;
+    padding: 20px;
+}
