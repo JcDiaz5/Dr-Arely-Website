@@ -13,7 +13,7 @@ import datetime
 app = Flask(__name__)
 app.secret_key = "Balu's secret"  # Change this to a secure secret key.
 
-DENTIST_CALENDAR_ID = 'dra-arely-s-website@dental-website-1116.iam.gserviceaccount.com'
+DENTIST_CALENDAR_ID = 'cdarelyuribe@gmail.com'
 
 class BookingForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
@@ -53,20 +53,32 @@ def book():
 
 # Function to send appointment details to Google Calendar
 def send_to_google_calendar(details):
-    # Combine date and time strings into a single datetime object
-    datetime_str = f"{details['date']} {details['time']}"
-    details['appointment_datetime'] = datetime.datetime.strptime(datetime_str, '%Y-%m-%d %H:%M')
+    # Check if both date and time components are present
+    if 'date' in details and 'time' in details and details['date'] and details['time']:
+        # Combine date and time strings into a single datetime object
+        datetime_str = f"{details['date']} {details['time']}"
+        details['appointment_datetime'] = datetime.datetime.strptime(datetime_str, '%Y-%m-%d %H:%M')
 
+        # Adjust the start and end times accordingly
+        event = {
+            'summary': 'Appointment',
+            'description': f"Nombre: {details['name']}\nEmail: {details['email']}\nGuest ID: {details['guest_id']}",
+            'start': {
+                'dateTime': details['appointment_datetime'].isoformat(),
+                'timeZone': 'UTC',
+            },
+            'end': {
+                'dateTime': (details['appointment_datetime'] + datetime.timedelta(hours=1.5)).isoformat(),
+                'timeZone': 'UTC',
+            },
+        }
 
-    # Adjust the start and end times accordingly
-    event = {
-        'summary': 'Appointment',
-        'description': f"Name: {details['name']}\nEmail: {details['email']}\nDate: {details['date']}\nTime: {details['time']}\nGuest ID: {details['guest_id']}",
-    }
+        service = get_google_calendar_service()
+        service.events().insert(calendarId=DENTIST_CALENDAR_ID, body=event).execute()
+        print('############## Send to calendar is working #############', event)
+    else:
+        print("-------------- Error: Date or time component is missing. ---------------")
 
-    service = get_google_calendar_service()
-    service.events().insert(calendarId=DENTIST_CALENDAR_ID, body=event).execute()
-    print('############## Send to calendar is working #############', event)
 
 def get_google_calendar_service():
     # Use a service account for server-to-server authentication
