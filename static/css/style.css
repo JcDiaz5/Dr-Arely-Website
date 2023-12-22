@@ -280,3 +280,7 @@ button:hover {
 .date-field {
     flex: 60%;
 }
+
+.validation-text {
+    color: red;
+}

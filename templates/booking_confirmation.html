@@ -10,11 +10,12 @@
     <title>Dra. Arely | Confirmación</title>
 </head>
 <body>
-    <h1>Booking Confirmation</h1>
-    <p>Thank you for booking an appointment with us. Your details are as follows:</p>
+    <h1>Cita agendada!</h1>
+    <p>Gracias por haber agendado. La Dra. Arely se comunicara con usted en caso de requerir información adicional o para aclaraciones. Los datos de la cita agendada son los siguientes:</p>
     <ul>
         <li><strong>Nombre:</strong> {{ details.name }}</li>
-        <li><strong>Correo Electronico:</strong> {{ details.email }}</li>
+        <li><strong>Email:</strong> {{ details.email }}</li>
+        <li><strong>Teléfono:</strong> {{ details.phone }}</li>
         <li><strong>Fecha de Cita:</strong> {{ details.date }} {{details.time}} </li>
         <li><strong>Guest ID:</strong> {{ details.guest_id }}</li>
     </ul>
