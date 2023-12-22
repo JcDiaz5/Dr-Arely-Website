@@ -13,7 +13,7 @@ import datetime
 app = Flask(__name__)
 app.secret_key = "Balu's secret"  # Change this to a secure secret key.
 
-DENTIST_CALENDAR_ID = 'cdarelyuribe@gmail.com'
+DENTIST_CALENDAR_ID = '1d157f9d7c9ad6fa4202bd92820539282e8f0799df30507ebcede6589ff20881@group.calendar.google.com'
 
 class BookingForm(FlaskForm):
     name = StringField('Name', validators=[DataRequired()])
@@ -62,14 +62,14 @@ def send_to_google_calendar(details):
         # Adjust the start and end times accordingly
         event = {
             'summary': 'Appointment',
-            'description': f"Nombre: {details['name']}\nEmail: {details['email']}\nGuest ID: {details['guest_id']}",
+            'description': f"Name: {details['name']}\nEmail: {details['email']}\nGuest ID: {details['guest_id']}",
             'start': {
                 'dateTime': details['appointment_datetime'].isoformat(),
-                'timeZone': 'UTC',
+                'timeZone': 'America/Los_Angeles', # Pacific Time Zone
             },
             'end': {
                 'dateTime': (details['appointment_datetime'] + datetime.timedelta(hours=1.5)).isoformat(),
-                'timeZone': 'UTC',
+                'timeZone': 'America/Los_Angeles',
             },
         }
 
