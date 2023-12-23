@@ -12,10 +12,15 @@ import uuid
 import datetime
 
 app = Flask(__name__)
-app.secret_key = "Balu's secret"  # Change this to a secure secret key.
+app.secret_key = os.environ.get("FLASK_SECRET_KEY", "default_secret_key")
+
+credentials_path = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS_PATH', 'credentials.json')
+ssl_key_path = os.environ.get('SSL_KEY_PATH', 'ssl/key.pem')
+ssl_cert_path = os.environ.get('SSL_CERT_PATH', 'ssl/cert.pem')
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 DENTIST_CALENDAR_ID = '1d157f9d7c9ad6fa4202bd92820539282e8f0799df30507ebcede6589ff20881@group.calendar.google.com'
+
 
 class BookingForm(FlaskForm):
     name = StringField('name')
@@ -55,7 +60,8 @@ def booking_form():
     form = BookingForm()
     return render_template('booking_form.html', form=form)
 
-appointments = []
+
+appointment = []
 
 @app.route('/book', methods=['GET', 'POST'])
 def book():
@@ -71,9 +77,15 @@ def book():
         'time': form.time.data,
         'guest_id': guest_id
     }
-    appointments.append(appointment_details)  # Store appointment details.
+    appointment.append(appointment_details)  # Store appointment details.
     send_to_google_calendar(appointment_details)  # Call a function to send the details to the Google Calendar.
-    return render_template('booking_confirmation.html', details=appointment_details)
+    print('####', appointment)
+    return redirect('/appointment')
+
+@app.route('/appointment')
+def appointment_confirmation():
+    details = appointment
+    return render_template('booking_confirmation.html', details=details)
 
 # Function to send appointment details to Google Calendar
 def send_to_google_calendar(details):
@@ -81,7 +93,9 @@ def send_to_google_calendar(details):
     if 'date' in details and 'time' in details and details['date'] and details['time']:
         # Combine date and time strings into a single datetime object
         datetime_str = f"{details['date']} {details['time']}"
-        details['appointment_datetime'] = datetime.datetime.strptime(datetime_str, '%Y-%m-%d %H:%M')
+        print(f"Time before conversion: {details['time']}")
+        details['appointment_datetime'] = datetime.datetime.strptime(datetime_str, '%Y-%m-%d %H:%M:%S')
+        print(f"Converted datetime: {details['appointment_datetime']}")
 
         event = {
             'summary': 'Appointment',
@@ -111,4 +125,6 @@ def get_google_calendar_service():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    ssl_key_path = os.environ.get('SSL_KEY_PATH', 'ssl/key.pem')
+    ssl_cert_path = os.environ.get('SSL_CERT_PATH', 'ssl/cert.pem')
+    app.run(debug=True, ssl_context=(ssl_cert_path, ssl_key_path))

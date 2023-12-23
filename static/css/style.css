@@ -284,3 +284,34 @@ button:hover {
 .validation-text {
     color: red;
 }
+
+/* ___________________Appointment Confirmation_________________ */
+.appointment-confirmation-container {
+    display: flex;
+    width: 1000px;
+    margin: 0px auto;
+    padding: 60px 0px;
+    gap: 20px;
+}
+
+.appointment-info {
+    display: flex;
+    flex-direction: column;
+    color:rgb(114, 81, 125);
+    gap:20px;
+    width: 60%;
+}
+
+.appointment-info h1 {
+    text-align: center;
+}
+
+.appointment-info-block {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+strong {
+    font-weight: 900;
+}
