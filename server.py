@@ -77,6 +77,7 @@ def book():
         'time': form.time.data,
         'guest_id': guest_id
     }
+    appointment.clear() # Clear list from previous appointment.
     appointment.append(appointment_details)  # Store appointment details.
     send_to_google_calendar(appointment_details)  # Call a function to send the details to the Google Calendar.
     print('####', appointment)
