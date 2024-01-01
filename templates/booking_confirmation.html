@@ -21,29 +21,36 @@
                 </div>
             </div>
         </div>
+        <div class="confirmation-msg-container">
+            <div class="confirmation-msg">
+                <h1>Cita agendada!</h1>
+            <p>
+                En caso de requerir informacion adicional o para aclaraciones, la Dra. Arely se comunicara con usted.
+            </p>
+            </div>
+        </div>
         <div class="appointment-confirmation-container">
             <div class="appointment-info">
-                <h1>Cita agendada!</h1>
-                <p>
-                    Gracias por haber agendado.<br>
-                    En caso de requerir informacion adicional o para aclaraciones, la Dra. Arely se comunicara con usted.</p>
                 <div class="appointment-info-block">
-                <h3>
-                    Los datos de la cita agendada son los siguientes:
-                </h3>
-                <ul>
-                    {% for detail in details %}
-                        <li><strong>Nombre:</strong> {{ detail.name }}</li>
-                        <li><strong>Email:</strong> {{ detail.email }}</li>
-                        <li><strong>Teléfono:</strong> {{ detail.phone }}</li>
-                        <li><strong>Fecha de Cita:</strong> {{ detail.date.strftime('%m/%d/%Y') }} {{ detail.time.strftime('%H:%M') }}</li>
-                    {% endfor %}
-                </ul>
+                    <p class="instructions">
+                        Por favor presentarse en la clínica <span class="clinic">Dental Spa</span> en la fecha y hora de la cita.
+                    </p>
+                    <p class="small-print">
+                        Se darán 15 minutos de tolerancia antes de cancelar la cita.
+                    </p>
+                    <ul>
+                        {% for detail in details %}
+                            <li>Nombre:<span class="details"> {{ detail.name }}</span></li>
+                            <li>Email:<span class="details"> {{ detail.email }}</span></li>
+                            <li>Teléfono:<span class="details"> {{ detail.phone }}</span></li>
+                            <li>Fecha de Cita:<span class="details"> {{ detail.date.strftime('%m/%d/%Y') }} {{ detail.time.strftime('%H:%M') }}</span></li>
+                        {% endfor %}
+                    </ul>
                 </div>
-            </div>
-            <div class="map-block">
-                <h3>Ubicación de la clínica</h3>
-                <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d107634.6380742998!2d-117.0108172220459!3d32.53729747386612!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d949ac8fe737d5%3A0xb7091e6ad65ed707!2sDental%20Spa%20By%20K%26F!5e0!3m2!1sen!2smx!4v1703282651593!5m2!1sen!2smx" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <div class="map-block">
+                    <h3>Ubicación de la clínica</h3>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d107634.6380742998!2d-117.0108172220459!3d32.53729747386612!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80d949ac8fe737d5%3A0xb7091e6ad65ed707!2sDental%20Spa%20By%20K%26F!5e0!3m2!1sen!2smx!4v1703282651593!5m2!1sen!2smx" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
             </div>
         </div>
     </div>
