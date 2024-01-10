@@ -1,9 +1,7 @@
 from flask import Flask, render_template, request, flash, redirect
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, TimeField, ValidationError
-from wtforms.validators import DataRequired
 from googleapiclient.discovery import build
-from google.auth.transport.requests import Request
 from google.oauth2.service_account import Credentials
 
 import os
@@ -60,7 +58,6 @@ def booking_form():
     form = BookingForm()
     return render_template('booking_form.html', form=form)
 
-
 appointment = []
 
 @app.route('/book', methods=['GET', 'POST'])
@@ -78,9 +75,9 @@ def book():
         'guest_id': guest_id
     }
     appointment.clear() # Clear list from previous appointment.
-    appointment.append(appointment_details)  # Store appointment details.
-    send_to_google_calendar(appointment_details)  # Call a function to send the details to the Google Calendar.
+    appointment.append(appointment_details)
     print('####', appointment)
+    send_to_google_calendar(appointment_details) 
     return redirect('/appointment')
 
 @app.route('/appointment')
@@ -88,16 +85,21 @@ def appointment_confirmation():
     details = appointment
     return render_template('booking_confirmation.html', details=details)
 
-# Function to send appointment details to Google Calendar
 def send_to_google_calendar(details):
-    # Check if both date and time components are present
     if 'date' in details and 'time' in details and details['date'] and details['time']:
-        # Combine date and time strings into a single datetime object
-        datetime_str = f"{details['date']} {details['time']}"
-        print(f"Time before conversion: {details['time']}")
-        details['appointment_datetime'] = datetime.datetime.strptime(datetime_str, '%Y-%m-%d %H:%M:%S')
-        print(f"Converted datetime: {details['appointment_datetime']}")
 
+        datetime_str = f"{details['date']} {details['time']}"
+        print(f"*** {details['date']} {details['time']} ***")
+        details['appointment_datetime'] = datetime.datetime.strptime(datetime_str, '%Y-%m-%d %H:%M:%S')
+        print(f".... Date and Time (string): {details['appointment_datetime']} ....")
+
+# __________________________________DO NOT ERASE CODE, PENDING OVERLAP BOOKING VALIDATIONS!________________________________
+        # # Checking for conflicts with existing events
+        # if has_conflict(details):
+        #     flash("¡Conflicto de citas! Por favor, elija otra hora o fecha.")
+        #     return redirect('/booking_form')
+        # else:
+# ____________________________________TAB OVER THE BOTTOM CODE___________________________________________
         event = {
             'summary': 'Appointment',
             'description': f"Name: {details['name']}\nEmail: {details['email']}\nPhone: {details['phone']}\nGuest ID: {details['guest_id']}",
@@ -106,14 +108,70 @@ def send_to_google_calendar(details):
                 'timeZone': 'America/Los_Angeles', # Pacific Time Zone
             },
             'end': {
-                'dateTime': (details['appointment_datetime'] + datetime.timedelta(hours=1.5)).isoformat(),
+                'dateTime': (details['appointment_datetime'] + datetime.timedelta(hours=2)).isoformat(),
                 'timeZone': 'America/Los_Angeles',
             },
         }
         service = get_google_calendar_service()
         service.events().insert(calendarId=DENTIST_CALENDAR_ID, body=event).execute()
-    else:
-        print("-------------- Error: Date or time component is missing. ---------------")
+        print("-------------- Event created successfully ---------------")
+# __________________________________DO NOT ERASE CODE, PENDING OVERLAP BOOKING VALIDATIONS!________________________________
+    # else:
+    #     flash("-------------- Error: Date or time component is missing. ---------------")
+    #     return redirect('/booking_form')
+
+def is_conflict(new_start, new_end, existing_start, existing_end):
+    conflict = new_start < existing_end and new_end > existing_start
+    return conflict
+
+def has_conflict(new_details):
+
+    service = get_google_calendar_service()
+
+    if not ('appointment_datetime' in new_details and new_details['appointment_datetime']):
+        print("Error: Invalid date or time component.")
+        return False
+    
+    print(f"Checking for conflicts in the time range: {new_details['appointment_datetime']} - {new_details['appointment_datetime'] + datetime.timedelta(hours=2)}")
+    print(f"timeMin: {new_details['appointment_datetime'].isoformat()}")
+    print(f"timeMax: {(new_details['appointment_datetime'] + datetime.timedelta(hours=2)).isoformat()}")
+
+    events_result = (
+        service.events()
+        .list(
+            calendarId=DENTIST_CALENDAR_ID,
+            timeMin=new_details['appointment_datetime'].isoformat(),
+            timeMax=(new_details['appointment_datetime'] + datetime.timedelta(hours=2)).isoformat(),
+            singleEvents=True,
+            orderBy='startTime',
+        )
+        .execute()
+    )
+    print('Events Result:', events_result)
+
+    print(f'--------{events_result}--------')
+    existing_events = events_result.get('items', [])
+
+    # Check for conflicts with existing events
+    for existing_event in existing_events:
+        print(f"......... {existing_event} .........")
+        try:
+            existing_start = datetime.datetime.fromisoformat(existing_event['start']['dateTime'])
+            existing_end = datetime.datetime.fromisoformat(existing_event['end']['dateTime'])
+        except ValueError as e:
+            print(f"Error processing existing event: {e}")
+            continue  # Skip this event and move to the next one
+        
+        if is_conflict(
+                new_details['appointment_datetime'],
+                new_details['appointment_datetime'] + datetime.timedelta(hours=2),
+                existing_start,
+                existing_end
+        ):
+            print(f"Time range in API request: {new_details['appointment_datetime']} - {new_details['appointment_datetime'] + datetime.timedelta(hours=2)}")
+            return True
+
+    return False
 
 
 def get_google_calendar_service():
@@ -121,6 +179,7 @@ def get_google_calendar_service():
     credentials = Credentials.from_service_account_file('credentials.json', scopes=['https://www.googleapis.com/auth/calendar'])
     # Create the Google Calendar service
     service = build('calendar', 'v3', credentials=credentials)
+    print('........Get calendar is working..................')
     return service
 
 
