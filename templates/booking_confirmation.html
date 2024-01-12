@@ -24,9 +24,9 @@
         <div class="confirmation-msg-container">
             <div class="confirmation-msg">
                 <h1>Cita agendada!</h1>
-            <p>
-                En caso de requerir informacion adicional o para aclaraciones, la Dra. Arely se comunicara con usted.
-            </p>
+                <p>
+                    En caso de requerir informacion adicional o para aclaraciones, la Dra. Arely se comunicara con usted.
+                </p>
             </div>
         </div>
         <div class="appointment-confirmation-container">
@@ -40,10 +40,9 @@
                     </p>
                     <ul>
                         {% for detail in details %}
-                            <li>Nombre:<span class="details"> {{ detail.name }}</span></li>
-                            <li>Email:<span class="details"> {{ detail.email }}</span></li>
-                            <li>Teléfono:<span class="details"> {{ detail.phone }}</span></li>
-                            <li>Fecha de Cita:<span class="details"> {{ detail.date.strftime('%m/%d/%Y') }} {{ detail.time.strftime('%H:%M') }}</span></li>
+                            <li class="app-datetime">Datos de Cita: <br>
+                                <span class="details"> {{ detail.date.strftime('%m/%d/%Y') }} {{ detail.time.strftime('%H:%M') }}</span>
+                            </li>
                         {% endfor %}
                     </ul>
                 </div>

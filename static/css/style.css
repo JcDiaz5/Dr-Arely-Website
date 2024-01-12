@@ -312,38 +312,13 @@
     .instructions {
         font-size: 25px;
         font-weight: 900;
-        color:rgb(40, 96, 156);
+        color:rgb(18, 71, 109);
     }
     
     .clinic {
         color: rgb(110, 44, 112);
         border-bottom: 1px solid;
         font-weight: 800;
-    }
-    
-    .appointment-info-block ul {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        font-size: 20px;
-        font-weight: 700;
-        color:rgb(17, 93, 179);
-        text-decoration: none;
-    }
-    
-    li {
-        list-style: none;
-        background-color: rgb(221, 240, 249);
-        border: 2px solid rgb(65, 138, 223);
-        padding: 10px;
-        border-radius: 10px;
-        box-shadow: 3px 3px 4px;
-        width: 300px auto;
-    }
-    
-    .details {
-        color:rgb(85, 16, 97);
-        font-weight: 900;
     }
     
     .confirmation-msg-container {
@@ -363,16 +338,37 @@
     }
     
     .small-print {
-        font-size: 16px;
-        color:rgb(85, 16, 97);
+        font-size: 14px;
+        padding: 5px 10px;
+        margin: 0px 20px;
+        background-color: rgb(253, 253, 212);
+        border: 1px dashed orange;
+        border-radius: 10px;
+        text-align: center;
+    }
+    
+    .app-datetime {
+        margin: 30px;
+        color:rgb(18, 71, 109);
+        list-style: none;
+        font-size: 40px;
+        text-align: center;
+    }
+    
+    .details {
+        color:rgb(18, 71, 109);
+        text-align: center;
+        font-size: 50px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
     }
     
     .map-block h3 {
-        color:rgb(85, 16, 97);
+        color:rgb(18, 71, 109);
         margin-bottom: 20px;
         font-size: 25px;
         font-weight: 800;
-        border-bottom: 1.5px solid;
+        border-bottom: 1.5px solid rgb(18, 71, 109);
     }
 }
 
@@ -389,7 +385,7 @@
     }
     
     .navbar-background {
-        background-color: rgb(73, 134, 178);
+        background-color: rgb(112, 79, 125);
         width: 100%;
         border-bottom: .5px solid silver;
     }
@@ -415,8 +411,8 @@
     }
     
     .navbar-logo {
-        width: 70px;
-        padding: 25px 25px 20px;
+        width: 50px;
+        padding: 20px 20px 15px;
     }
     
     
@@ -425,7 +421,7 @@
     .content-background {
         width: 100%;
         display: flex;
-        background-color: aliceblue;
+        background-color: rgb(248, 245, 255);
 
     }
     
@@ -484,18 +480,21 @@
         padding: 20px;
         text-decoration: none;
         color: whitesmoke;
-        background-color: rgb(93, 129, 160);
+        background-color: rgb(112, 79, 125);
     }
 
     video {
-        padding-top: 70px;
         width: 200px;
         height: auto;
+        border-radius: 15px;
+        box-shadow: 2px 2px 5px 3px gray;
+        margin-top: 70px;
     }
 
     /* ______________________LOCATION BLOCK_________________________ */
     .location-block-background {
         width: 100%;
+        background-color: rgb(238, 240, 251);
     }
     
     .location-block {
@@ -520,7 +519,7 @@
     /* _________________________FAQ BLOCK___________________________ */
     .faq-block-backgound {
         width: 100%;
-        background-color: aliceblue;
+        background-color:rgb(248, 245, 255);
     }
     
     .faq-block {
@@ -549,6 +548,7 @@
     /* _______________________RESUME BLOCK__________________________ */
     .resume-block-background {
         width: 100%;
+        background-color: rgb(238, 240, 251);
     }
     
     .resume-block {
@@ -564,5 +564,138 @@
     .cv-link {
         color: rgb(125, 96, 199);
     }
+
+/* ___________________________________________________________________________ */
+/* ________________________________BOOKING FORM_______________________________ */
+
+    .booking-bg {
+        background-color: rgb(238, 240, 251);
+        height: 100%;
+    }
+
+    .block-title {
+        text-align: center;
+        padding: 20px;
+        font-weight: bold;
+        color: rgb(88, 65, 96);
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .booking-form {
+        color: white;
+        background-color: rgb(120, 81, 134);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 30px;
+        margin: 10px 15px;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 1px 1px 4px 2px gray;
+    }
+
+    .date-time {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    label {
+        font-weight: 800;
+        font-size: 18px;
+        border-bottom: 10px;
+    }
+
+    input {
+        font-size: 16px;
+        padding: 5px 10px;
+        border-radius: 10px;
+        width: 95%;
+        border: none;
+        margin-top: 10px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    button {
+        color: rgb(120, 81, 134);
+        background-color: rgb(217, 194, 226);
+        font-size: 18px;
+        padding: 10px;
+        margin: 0px auto;
+        border: none;
+        border-radius: 10px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+
+/* ___________________________________________________________________________ */
+/* ___________________________BOOKING CONFIRMATION____________________________ */
+
+.confirmation-msg-container {
+    background-color: rgb(56, 125, 56);
+    width: 100%;
+    padding: 5px;
+    margin: 20px 0px;
+}
+
+.confirmation-msg {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+    margin: 10px 20px;
+}
+.confirmation-msg h1 {
+    width: 100%;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.confirmation-msg p {
+    font-size: 15px;
+    color: white;
+}
+.instructions {
+    margin: 10px 20px;
+    font-size: 16px;
+    font-weight: 800;
+    text-align: center;
+}
+
+.small-print {
+    font-size: 14px;
+    padding: 5px 10px;
+    margin: 0px 20px;
+    background-color: rgb(253, 253, 212);
+    border: 1px dashed orange;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.app-datetime {
+    margin: 20px;
+    list-style: none;
+    font-size: 25px;
+    text-align: center;
+}
+
+.details {
+    text-align: center;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+.map-block {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    text-align: center;
+}
 
 }
