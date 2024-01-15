@@ -160,8 +160,8 @@
         flex-direction: column;
         width: 1000px;
         margin: 0px auto;
-        gap: 30px;
-        padding: 20px 0px 100px;
+        gap: 20px;
+        padding: 15px 0px 50px;
     }
     
     .faq-block h1 {
@@ -171,10 +171,11 @@
     
     .faq-container h2 {
         color: rgb(18, 71, 109);
+        margin-bottom: 10px;
     }
     
     .faq-container p {
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
     
     
@@ -202,6 +203,12 @@
         transform: scale(1.1);
     }
     
+    .resume-block img{
+        width: 700px;
+        border-radius: 30px;
+        padding: 20px;
+        box-shadow: 0px 0px 5px 3px rgb(207, 207, 207);
+    }
     
     /* ______________IMAGES_________________________________________ */
     
@@ -233,21 +240,32 @@
     
     label {
         display: block;
-        margin-bottom: 8px;
+        margin: 8px 0px 10px;
+        font-size: 18px;
+        color: rgb(62, 62, 62);
     }
     
+
     input {
         width: 100%;
-        padding: 8px;
+        padding: 10px;
+        font-size: 18px;
         margin-bottom: 16px;
+        border-radius: 10px;
+        border: none;
+        box-shadow: 0px 0px 3px 2px rgb(214, 214, 214);
     }
     
     .block-title {
         text-align: center;
-        padding: 50px 0px;
-        color:rgb(30, 101, 164);
+        font-family: Arial, Helvetica, sans-serif;
+        padding: 20px;
+        margin: 25px auto;
+        color:rgb(252, 252, 252);
+        background-color: #4a8bbc;
+        box-shadow: 0px 0px 5px 4px rgb(173, 173, 173);
+        width: 100%;
         font-weight: 900;
-        text-shadow: .5px 1px 1.5px;
     }
     
     .booking-bg {
@@ -269,7 +287,18 @@
         text-align: center;
         color: red;
     }
-    
+
+    .booking-form {
+        display: flex;
+        flex-direction: column;
+        padding: 30px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+    }
+
     button {
         width: 150px;
         font-size: 18px;
@@ -278,7 +307,7 @@
         color: whitesmoke;
         background-color: rgb(93, 129, 160);
         transition: transform 0.3s ease-in-out;
-        margin: 15px 0px;
+        margin-top: 30px;
         border: none;
     }
     
@@ -286,6 +315,7 @@
         transform: scale(1.05);
         color: rgb(255, 255, 255);
         background-color: rgb(56, 119, 173);
+        box-shadow: 0px 0px 5px 3px rgba(201, 201, 201, 0.693);
     }
     /* ___________________Appointment Confirmation_________________ */
     .appointment-confirmation-container {
@@ -329,10 +359,18 @@
     
     .confirmation-msg {
         width: 1000px;
-        padding: 50px 0px;
+        padding: 30px 0px;
         margin: 0px auto;
     }
     
+    ul {
+        background-color: rgba(255, 255, 255, 0.258);
+        border-radius: 15px;
+        padding: 20px 0px;
+        box-shadow: 2px 2px 4px 3px rgb(204, 204, 204);
+        border: none;
+    }
+
     .confirmation-msg p {
         font-size: 20px;
     }
@@ -363,6 +401,13 @@
         font-weight: bold;
     }
     
+    .map-block {
+        background-color: rgba(255, 255, 255, 0.258);
+        padding: 20px 20px 40px;
+        border-radius: 15px;
+        box-shadow: 2px 2px 4px 3px rgb(204, 204, 204);
+    }
+
     .map-block h3 {
         color:rgb(18, 71, 109);
         margin-bottom: 20px;
@@ -565,7 +610,13 @@
         color: rgb(125, 96, 199);
     }
 
-/* ___________________________________________________________________________ */
+    .resume-block img {
+        width: 500px;
+        padding: 15px;
+        border-radius: 20px;
+        box-shadow: 0px 0px 4px 2px rgb(201, 201, 201);
+    }
+
 /* ________________________________BOOKING FORM_______________________________ */
 
     .booking-bg {
@@ -632,70 +683,81 @@
         font-family: Arial, Helvetica, sans-serif;
     }
 
-
+    .validation-text {
+        color: red;
+        text-align: center;
+    }
 /* ___________________________________________________________________________ */
 /* ___________________________BOOKING CONFIRMATION____________________________ */
 
-.confirmation-msg-container {
-    background-color: rgb(56, 125, 56);
-    width: 100%;
-    padding: 5px;
-    margin: 20px 0px;
-}
+    .confirmation-msg-container {
+        background-color: rgb(56, 125, 56);
+        width: 100%;
+        padding: 5px;
+        margin: 20px 0px;
+    }
 
-.confirmation-msg {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    gap: 15px;
-    margin: 10px 20px;
-}
-.confirmation-msg h1 {
-    width: 100%;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
-}
+    .confirmation-msg {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        margin: 10px 20px;
+    }
+    .confirmation-msg h1 {
+        width: 100%;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+    }
 
-.confirmation-msg p {
-    font-size: 15px;
-    color: white;
-}
-.instructions {
-    margin: 10px 20px;
-    font-size: 16px;
-    font-weight: 800;
-    text-align: center;
-}
+    .confirmation-msg p {
+        font-size: 15px;
+        color: white;
+    }
+    .instructions {
+        margin: 10px 20px;
+        font-size: 16px;
+        font-weight: 800;
+        text-align: center;
+    }
 
-.small-print {
-    font-size: 14px;
-    padding: 5px 10px;
-    margin: 0px 20px;
-    background-color: rgb(253, 253, 212);
-    border: 1px dashed orange;
-    border-radius: 15px;
-    text-align: center;
-}
+    .small-print {
+        font-size: 14px;
+        padding: 5px 10px;
+        margin: 0px 20px;
+        background-color: rgb(253, 253, 212);
+        border: 1px dashed orange;
+        border-radius: 15px;
+        text-align: center;
+    }
 
-.app-datetime {
-    margin: 20px;
-    list-style: none;
-    font-size: 25px;
-    text-align: center;
-}
+    ul {
+        background-color: rgba(255, 255, 255, 0.352);
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 4px 3px rgb(185, 185, 185);
+        margin: 20px 15px;
+        color:rgb(64, 64, 64)
+    }
 
-.details {
-    text-align: center;
-    font-size: 30px;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-}
+    .app-datetime {
+        margin: 20px;
+        list-style: none;
+        font-size: 25px;
+        text-align: center;
+    }
 
-.map-block {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
-}
+    .details {
+        text-align: center;
+        font-size: 30px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+    }
 
+    .map-block {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
 }

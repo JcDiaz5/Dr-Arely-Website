@@ -29,9 +29,6 @@ class BookingForm(FlaskForm):
 
     # Validations for booking form
     def validate(self):
-        if not super().validate():
-            flash("Corrige los errores por favor.")
-            return False
         if len(self.name.data) < 2:
             flash("Nombre debe contener al menos 2 letras.")
             return False
@@ -120,58 +117,58 @@ def send_to_google_calendar(details):
     #     flash("-------------- Error: Date or time component is missing. ---------------")
     #     return redirect('/booking_form')
 
-def is_conflict(new_start, new_end, existing_start, existing_end):
-    conflict = new_start < existing_end and new_end > existing_start
-    return conflict
+# def is_conflict(new_start, new_end, existing_start, existing_end):
+#     conflict = new_start < existing_end and new_end > existing_start
+#     return conflict
 
-def has_conflict(new_details):
+# def has_conflict(new_details):
 
-    service = get_google_calendar_service()
+#     service = get_google_calendar_service()
 
-    if not ('appointment_datetime' in new_details and new_details['appointment_datetime']):
-        print("Error: Invalid date or time component.")
-        return False
+#     if not ('appointment_datetime' in new_details and new_details['appointment_datetime']):
+#         print("Error: Invalid date or time component.")
+#         return False
     
-    print(f"Checking for conflicts in the time range: {new_details['appointment_datetime']} - {new_details['appointment_datetime'] + datetime.timedelta(hours=2)}")
-    print(f"timeMin: {new_details['appointment_datetime'].isoformat()}")
-    print(f"timeMax: {(new_details['appointment_datetime'] + datetime.timedelta(hours=2)).isoformat()}")
+#     print(f"Checking for conflicts in the time range: {new_details['appointment_datetime']} - {new_details['appointment_datetime'] + datetime.timedelta(hours=2)}")
+#     print(f"timeMin: {new_details['appointment_datetime'].isoformat()}")
+#     print(f"timeMax: {(new_details['appointment_datetime'] + datetime.timedelta(hours=2)).isoformat()}")
 
-    events_result = (
-        service.events()
-        .list(
-            calendarId=DENTIST_CALENDAR_ID,
-            timeMin=new_details['appointment_datetime'].isoformat(),
-            timeMax=(new_details['appointment_datetime'] + datetime.timedelta(hours=2)).isoformat(),
-            singleEvents=True,
-            orderBy='startTime',
-        )
-        .execute()
-    )
-    print('Events Result:', events_result)
+#     events_result = (
+#         service.events()
+#         .list(
+#             calendarId=DENTIST_CALENDAR_ID,
+#             timeMin=new_details['appointment_datetime'].isoformat(),
+#             timeMax=(new_details['appointment_datetime'] + datetime.timedelta(hours=2)).isoformat(),
+#             singleEvents=True,
+#             orderBy='startTime',
+#         )
+#         .execute()
+#     )
+#     print('Events Result:', events_result)
 
-    print(f'--------{events_result}--------')
-    existing_events = events_result.get('items', [])
+#     print(f'--------{events_result}--------')
+#     existing_events = events_result.get('items', [])
 
-    # Check for conflicts with existing events
-    for existing_event in existing_events:
-        print(f"......... {existing_event} .........")
-        try:
-            existing_start = datetime.datetime.fromisoformat(existing_event['start']['dateTime'])
-            existing_end = datetime.datetime.fromisoformat(existing_event['end']['dateTime'])
-        except ValueError as e:
-            print(f"Error processing existing event: {e}")
-            continue  # Skip this event and move to the next one
+#     # Check for conflicts with existing events
+#     for existing_event in existing_events:
+#         print(f"......... {existing_event} .........")
+#         try:
+#             existing_start = datetime.datetime.fromisoformat(existing_event['start']['dateTime'])
+#             existing_end = datetime.datetime.fromisoformat(existing_event['end']['dateTime'])
+#         except ValueError as e:
+#             print(f"Error processing existing event: {e}")
+#             continue  # Skip this event and move to the next one
         
-        if is_conflict(
-                new_details['appointment_datetime'],
-                new_details['appointment_datetime'] + datetime.timedelta(hours=2),
-                existing_start,
-                existing_end
-        ):
-            print(f"Time range in API request: {new_details['appointment_datetime']} - {new_details['appointment_datetime'] + datetime.timedelta(hours=2)}")
-            return True
+#         if is_conflict(
+#                 new_details['appointment_datetime'],
+#                 new_details['appointment_datetime'] + datetime.timedelta(hours=2),
+#                 existing_start,
+#                 existing_end
+#         ):
+#             print(f"Time range in API request: {new_details['appointment_datetime']} - {new_details['appointment_datetime'] + datetime.timedelta(hours=2)}")
+#             return True
 
-    return False
+#     return False
 
 
 def get_google_calendar_service():

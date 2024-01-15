@@ -40,7 +40,7 @@
                     </p>
                     <ul>
                         {% for detail in details %}
-                            <li class="app-datetime">Datos de Cita: <br>
+                            <li class="app-datetime">Fecha de Cita : <br>
                                 <span class="details"> {{ detail.date.strftime('%m/%d/%Y') }} {{ detail.time.strftime('%H:%M') }}</span>
                             </li>
                         {% endfor %}

@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <h1 class="block-title">Agendar una Cita</h1>
+        <h1 class="block-title">Agendar Cita</h1>
         <div class="validation-text">
             {% with messages = get_flashed_messages() %}     <!-- declare a variable called messages -->
                 {% if messages %}                            <!-- check if there are any messages -->
@@ -35,39 +35,24 @@
             {{ form.csrf_token }}
             <div>
                 <label for="name">Nombre Completo:</label>
-                <input type="text" class="name-field" name="name">
-                {% for error in form.name.errors %}
-                    <p class="error">{{ error }}</p>
-                {% endfor %}
+                <input type="text" class="input-field" name="name">
             </div>
             <div>
                 <label for="email">Email:</label>
-                <input type="email" class="email-field" name="email">
-                {% for error in form.email.errors %}
-                    <p class="error">{{ error }}</p>
-                {% endfor %}
+                <input type="email" class="input-field" name="email">
             </div>
             <div>
                 <label for="phone">Teléfono:</label>
-                <input type="text" class="phone-field" name="phone">
-                {% for error in form.phone.errors %}
-                    <p class="error">{{ error }}</p>
-                {% endfor %}
+                <input type="text" class="input-field" name="phone">
             </div>
             <div class="date-time">
                 <div class="date-field">
                     <label for="date">Fecha:</label>
                     <input type="date" class="date-field" name="date">
-                    {% for error in form.date.errors %}
-                        <p class="error">{{ error }}</p>
-                    {% endfor %}
                 </div>
                 <div class="time-field">
                     <label for="time">Hora:</label>
                     <input type="time" class="time-field" name="time">
-                    {% for error in form.time.errors %}
-                        <p class="error">{{ error }}</p>
-                    {% endfor %}
                 </div>
             </div>
             <div class="button-container">
