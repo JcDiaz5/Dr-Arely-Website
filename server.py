@@ -13,8 +13,6 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "default_secret_key")
 
 credentials_path = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS_PATH', 'credentials.json')
-ssl_key_path = os.environ.get('SSL_KEY_PATH', 'ssl/key.pem')
-ssl_cert_path = os.environ.get('SSL_CERT_PATH', 'ssl/cert.pem')
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 DENTIST_CALENDAR_ID = '1d157f9d7c9ad6fa4202bd92820539282e8f0799df30507ebcede6589ff20881@group.calendar.google.com'
@@ -182,6 +180,4 @@ def get_google_calendar_service():
 
 
 if __name__ == '__main__':
-    ssl_key_path = os.environ.get('SSL_KEY_PATH', 'ssl/key.pem')
-    ssl_cert_path = os.environ.get('SSL_CERT_PATH', 'ssl/cert.pem')
-    app.run(debug=True, ssl_context=(ssl_cert_path, ssl_key_path))
+    app.run(debug=True, host='0.0.0.0', port=5000)
