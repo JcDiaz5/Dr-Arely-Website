@@ -246,7 +246,7 @@
     }
     
 
-    input {
+    input, #time {
         width: 100%;
         padding: 10px;
         font-size: 18px;

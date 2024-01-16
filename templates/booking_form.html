@@ -52,7 +52,7 @@
                 </div>
                 <div class="time-field">
                     <label for="time">Hora:</label>
-                    <input type="time" class="time-field" name="time">
+                    <select id="time" name="time"></select>
                 </div>
             </div>
             <div class="button-container">
@@ -60,5 +60,22 @@
             </div>
         </form>
     </div>
+    <script>
+        // Populate the dropdown with 30-minute intervals
+        var dropdown = document.getElementById("time");
+        for (var hours = 0; hours < 24; hours++) {
+            for (var minutes = 0; minutes < 60; minutes += 30) {
+                var timeString = (hours < 10 ? "0" : "") + hours + ":" + (minutes === 0 ? "00" : minutes);
+                var option = document.createElement("option");
+                option.text = timeString;
+                option.value = timeString;
+                if (hours < 10 || hours > 17) {
+                    option.disabled = true;
+                    option.style.display = "none";
+                }
+                dropdown.add(option);
+            }
+        }
+    </script>      
 </body>
 </html>
