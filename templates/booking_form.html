@@ -35,24 +35,24 @@
         <form method="post" action="/book" class="booking-form">
             {{ form.csrf_token }}
             <div>
-                <label for="name">Nombre Completo:</label>
+                <label for="name">NOMBRE COMPLETO:</label>
                 <input type="text" class="input-field" name="name">
             </div>
             <div>
-                <label for="email">Email:</label>
+                <label for="email">EMAIL:</label>
                 <input type="email" class="input-field" name="email">
             </div>
             <div>
-                <label for="phone">Teléfono:</label>
+                <label for="phone">TELEFONO:</label>
                 <input type="text" class="input-field" name="phone">
             </div>
             <div class="date-time">
                 <div class="date-field">
-                    <label for="date">Fecha:</label>
+                    <label for="date">FECHA:</label>
                     <input type="date" id="appointmentDate" class="date-field" name="date">
                 </div>
                 <div class="time-field" id="timeField">
-                    <label for="time">Hora:</label>
+                    <label for="time">HORA:</label>
                     <select id="appointmentTime" name="time"></select>
                 </div>
             </div>
@@ -65,18 +65,13 @@
     // Populate the dropdown with 30-minute intervals
     var dropdown = document.getElementById("appointmentTime");
     
-    
-    for (var hours = 10; hours <= 17; hours++) {
+    for (var hours = 10; hours < 18; hours++) {
         for (var minutes = 0; minutes < 60; minutes += 30) {
-            var ampm = hours >= 12 ? 'PM' : 'AM';
-            var displayHours = hours % 12 || 12; // Convert 0 to 12
-            var timeString = (displayHours < 10 ? "0" : "") + displayHours + ":" + (minutes === 0 ? "00" : minutes) + " " + ampm;
-
-            var option = document.createElement("option");
-            option.text = timeString;
-            option.value = timeString;
-
-            dropdown.add(option);
+        var timeString = (hours < 10 ? "0" : "") + hours + ":" + (minutes === 0 ? "00" : minutes);
+        var option = document.createElement("option");
+        option.text = timeString;
+        option.value = timeString;
+        dropdown.add(option);
         }
     }
     </script>      
