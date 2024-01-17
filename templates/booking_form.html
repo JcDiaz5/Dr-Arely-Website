@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="referrer" content="no-referrer-when-downgrade">
     <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -48,11 +49,11 @@
             <div class="date-time">
                 <div class="date-field">
                     <label for="date">Fecha:</label>
-                    <input type="date" class="date-field" name="date">
+                    <input type="date" id="appointmentDate" class="date-field" name="date">
                 </div>
-                <div class="time-field">
+                <div class="time-field" id="timeField">
                     <label for="time">Hora:</label>
-                    <select id="time" name="time"></select>
+                    <select id="appointmentTime" name="time"></select>
                 </div>
             </div>
             <div class="button-container">
@@ -61,21 +62,23 @@
         </form>
     </div>
     <script>
-        // Populate the dropdown with 30-minute intervals
-        var dropdown = document.getElementById("time");
-        for (var hours = 0; hours < 24; hours++) {
-            for (var minutes = 0; minutes < 60; minutes += 30) {
-                var timeString = (hours < 10 ? "0" : "") + hours + ":" + (minutes === 0 ? "00" : minutes);
-                var option = document.createElement("option");
-                option.text = timeString;
-                option.value = timeString;
-                if (hours < 10 || hours > 17) {
-                    option.disabled = true;
-                    option.style.display = "none";
-                }
-                dropdown.add(option);
-            }
+    // Populate the dropdown with 30-minute intervals
+    var dropdown = document.getElementById("appointmentTime");
+    
+    
+    for (var hours = 10; hours <= 17; hours++) {
+        for (var minutes = 0; minutes < 60; minutes += 30) {
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            var displayHours = hours % 12 || 12; // Convert 0 to 12
+            var timeString = (displayHours < 10 ? "0" : "") + displayHours + ":" + (minutes === 0 ? "00" : minutes) + " " + ampm;
+
+            var option = document.createElement("option");
+            option.text = timeString;
+            option.value = timeString;
+
+            dropdown.add(option);
         }
+    }
     </script>      
 </body>
 </html>

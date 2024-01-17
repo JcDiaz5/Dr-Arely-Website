@@ -7,12 +7,18 @@ from google.oauth2.service_account import Credentials
 import os
 import re
 import uuid
+import json
 import datetime
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "default_secret_key")
 
 credentials_path = os.environ.get('GOOGLE_APPLICATION_CREDENTIALS_PATH', 'credentials.json')
+with open(credentials_path) as json_file:
+    credentials_data = json.load(json_file)
+
+# Access the private_key_id
+private_key_id = credentials_data['private_key_id']
 
 EMAIL_REGEX = re.compile(r'^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9._-]+\.[a-zA-Z]+$')
 DENTIST_CALENDAR_ID = '1d157f9d7c9ad6fa4202bd92820539282e8f0799df30507ebcede6589ff20881@group.calendar.google.com'
@@ -51,7 +57,7 @@ def home():
 @app.route('/booking_form')
 def booking_form():
     form = BookingForm()
-    return render_template('booking_form.html', form=form)
+    return render_template('booking_form.html', form=form, private_key_id=private_key_id, dentist_calendar_id=DENTIST_CALENDAR_ID)
 
 appointment = []
 
