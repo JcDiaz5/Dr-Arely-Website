@@ -9,7 +9,7 @@ flask==3.0.0; python_version >= '3.8'
 flask-bcrypt==1.0.1
 flask-wtf==1.2.1; python_version >= '3.8'
 google-api-core==2.15.0; python_version >= '3.7'
-google-api-python-client==2.111.0; python_version >= '3.7'
+google-api-python-client==2.114.0; python_version >= '3.7'
 google-auth==2.25.2; python_version >= '3.7'
 google-auth-httplib2==0.2.0
 googleapis-common-protos==1.62.0; python_version >= '3.7'
