@@ -103,7 +103,7 @@ def send_to_google_calendar(details):
     # else:
 # ____________________________________TAB OVER THE BOTTOM CODE___________________________________________
     event = {
-        'summary': f'Px(web) {details['name']}',
+        'summary': f"Px(web) {details['name']}",
         'description': f"Name: {details['name']}\nEmail: {details['email']}\nPhone: {details['phone']}\nGuest ID: {details['guest_id']}",
         'start': {
             'dateTime': details['appointment_datetime'].isoformat(),
