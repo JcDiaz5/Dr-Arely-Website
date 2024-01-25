@@ -7,7 +7,6 @@ from google.oauth2.service_account import Credentials
 import os
 import re
 import uuid
-import json
 import datetime
 
 app = Flask(__name__)
@@ -60,6 +59,7 @@ def book():
     form = BookingForm()
     if not form.validate():
         return redirect('/booking_form')
+    
     guest_id = str(uuid.uuid4())
     appointment_details = {
         'name': form.name.data,
@@ -69,9 +69,11 @@ def book():
         'time': form.time.data,
         'guest_id': guest_id
     }
+
     appointment.clear() # Clear list from previous appointment.
     appointment.append(appointment_details)
     print('####', appointment)
+
     send_to_google_calendar(appointment_details) 
     return redirect('/appointment')
 
